@@ -128,3 +128,4 @@ dist
 settings.json
 .DS_Store
 .vscode
+.gitignore
