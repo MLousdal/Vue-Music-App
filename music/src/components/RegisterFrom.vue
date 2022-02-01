@@ -101,7 +101,6 @@
           {{ error }}
         </div>
       </vee-field>
-      <ErrorMessage class="text-red-600" name="password" as="p" />
     </div>
     <!-- Confirm Password -->
     <div class="mb-3">
@@ -151,6 +150,30 @@
       </vee-field>
       <ErrorMessage class="text-red-600" name="country" as="p" />
     </div>
+    <!-- Listener / Artist -->
+    <div class="mb-3">
+      <label class="inline-block mb-2">Listener or Artist?</label>
+      <vee-field
+        as="select"
+        name="lis_art"
+        class="
+          block
+          w-full
+          py-1.5
+          px-3
+          text-gray-800
+          border border-gray-300
+          transition
+          duration-500
+          focus:outline-none focus:border-black
+          rounded
+        "
+      >
+        <option value="Listener">Listener</option>
+        <option value="Artist">Artist</option>
+      </vee-field>
+      <ErrorMessage class="text-red-600" name="lis_art" as="p" />
+    </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
       <vee-field
@@ -183,6 +206,8 @@
 </template>
 
 <script>
+import { auth, usersCollection } from '@/includes/firebase'
+
 export default {
   name: 'RegisterForm',
   data() {
@@ -191,13 +216,15 @@ export default {
         name: 'required|min:3|max:100|alpha_spaces',
         email: 'required|min:3|max:100|email',
         age: 'required|min_value:18|max_value:100',
-        password: 'required|min:3|max:32',
+        password: 'required|min:6|max:32',
         confirm_password: 'passwords_mismatch:@password',
         country: 'required|country_excluded:Antarctica',
+        lis_art: 'required',
         tos: 'tos',
       },
       userData: {
         country: 'USA',
+        lis_art: 'Listener',
       },
       reg_in_submission: false,
       reg_show_alert: false,
@@ -206,15 +233,24 @@ export default {
     }
   },
   methods: {
-    register(values) {
+    async register(values) {
       this.reg_show_alert = true
       this.reg_in_submission = true
       this.reg_alert_variant = 'bg-blue-500'
       this.reg_alert_msg = 'Please wait! Your account is being create...'
 
+      try {
+        await this.$store.dispatch('register', values)
+      } catch (error) {
+        this.reg_in_submission = false
+        this.reg_alert_variant = 'bg-red-500'
+        this.reg_alert_msg =
+          'An unexpected error occurred. Please try again later'
+        return
+      }
+
       this.reg_alert_variant = 'bg-green-500'
       this.reg_alert_msg = 'Success! Your account has been create!'
-      console.log(values)
     },
   },
 }
