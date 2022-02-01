@@ -11,7 +11,7 @@ let app
 
 auth.onAuthStateChanged(() => {
   if (!app) {
-    const app = createApp(App)
+    app = createApp(App)
     app.use(store)
     app.use(router)
     app.use(VeeValidatePlugin)
