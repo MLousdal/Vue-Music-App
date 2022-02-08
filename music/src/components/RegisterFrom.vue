@@ -206,7 +206,7 @@
 </template>
 
 <script>
-import { auth, usersCollection } from '@/includes/firebase'
+// import { auth, usersCollection } from '@/includes/firebase'
 
 export default {
   name: 'RegisterForm',
