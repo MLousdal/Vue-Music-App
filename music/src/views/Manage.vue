@@ -3,7 +3,7 @@
   <section class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <app-upload ref="upload"></app-upload>
+        <app-upload ref="upload" :addSong="addSong"></app-upload>
       </div>
       <div class="col-span-2">
         <div
@@ -23,6 +23,8 @@
               :song="song"
               :updateSong="updateSong"
               :index="i"
+              :removeSong="removeSong"
+              :updateUnsavedFlag="updateUnsavedFlag"
             ></composition-item>
           </div>
         </div>
@@ -43,6 +45,7 @@ export default {
   data() {
     return {
       songs: [],
+      unsavedFlag: false,
     }
   },
   async created() {
@@ -50,19 +53,36 @@ export default {
       .where('uid', '==', auth.currentUser.uid)
       .get()
 
-    snapshot.forEach((document) => {
-      const song = {
-        ...document.data(),
-        docID: document.id,
-      }
-      this.songs.push(song)
-    })
+    snapshot.forEach(this.addSong)
   },
   methods: {
     updateSong(i, values) {
       this.songs[i].modified_name = values.modified_name
       this.songs[i].genre = values.genre
     },
+    removeSong(i) {
+      this.songs.splice(i, 1)
+    },
+    addSong(document) {
+      const song = {
+        ...document.data(),
+        docID: document.id,
+      }
+      this.songs.push(song)
+    },
+    updateUnsavedFlag(value) {
+      this.unsavedFlag = value
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    if (!this.unsavedFlag) {
+      next()
+    } else {
+      const leave = confirm(
+        'You have unsaved changes. Are you sure you want to leave?'
+      )
+      next(leave)
+    }
   },
   // beforeRouteLeave(to, from, next) {
   //   this.$refs.upload.cancelUploads()

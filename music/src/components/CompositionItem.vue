@@ -4,6 +4,7 @@
       <h4 class="inline-block text-2xl font-bold">{{ song.modified_name }}</h4>
       <button
         class="ml-1 py-1 px-2 text-sm rounded text-white bg-red-600 float-right"
+        @click.prevent="deleteSong"
       >
         <i class="fa fa-times"></i>
       </button>
@@ -24,7 +25,11 @@
       </button>
     </div>
     <div v-show="showForm">
-      <div class="text-white text-center font-bold p-4 mp-4" :class="alert_variant" v-if="show_alert">
+      <div
+        class="text-white text-center font-bold p-4 mp-4"
+        :class="alert_variant"
+        v-if="show_alert"
+      >
         {{ alert_message }}
       </div>
       <vee-form
@@ -50,6 +55,7 @@
               rounded
             "
             placeholder="Enter Song Title"
+            @input="updateUnsavedFlag(true)"
           />
           <ErrorMessage class="text-red-600" name="modified_name" as="p" />
         </div>
@@ -71,6 +77,7 @@
               rounded
             "
             placeholder="Enter Genre"
+            @input="updateUnsavedFlag(true)"
           />
           <ErrorMessage class="text-red-600" name="genre" as="p" />
         </div>
@@ -95,7 +102,7 @@
 </template>
 
 <script>
-import { songsCollection } from '@/includes/firebase'
+import { songsCollection, storage } from '@/includes/firebase'
 
 export default {
   name: 'CompositionItem',
@@ -107,6 +114,13 @@ export default {
     updateSong: {
       type: Function,
       required: true,
+    },
+    removeSong: {
+      type: Function,
+      required: true,
+    },
+    updateUnsavedFlag: {
+      type: Function,
     },
     index: {
       type: Number,
@@ -143,10 +157,21 @@ export default {
       }
 
       this.updateSong(this.index, values)
+      this.updateUnsavedFlag(false)
 
       this.in_submission = false
       this.alert_variant = 'bg-green-500'
       this.alert_message = 'Success!'
+    },
+    async deleteSong() {
+      const storageRef = storage.ref()
+      const songRef = storageRef.child(`songs/${this.song.original_name}`)
+
+      await songRef.delete()
+
+      await songsCollection.doc(this.song.docID).delete()
+
+      this.removeSong(this.index)
     },
   },
 }
