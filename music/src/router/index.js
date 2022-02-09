@@ -3,6 +3,7 @@ import store from '@/store'
 import Home from '@/views/Home.vue'
 import About from '@/views/About.vue'
 import Manage from '@/views/Manage.vue'
+import Song from '@/views/Song.vue'
 
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About,
+  },
+  {
+    path: '/song/:id',
+    name: 'Song',
+    component: Song,
   },
   {
     path: '/manage-music',
