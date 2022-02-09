@@ -1,15 +1,19 @@
 # Vue-Music-App
 The product of the "Complete Vue Mastery 2022 (w/ Vuex, Composition API, Router)" course by Zero to Mastery
 
-## What have I learned?
+## What have I worked with?
 
-- Vue Router
+- Vue Router (Dynamic Route Matckmaking)
 - Firebase (Authentication, Storage, Collections)
 - Tailwind
 - Validation (VeeValidate)
-- Playing music (Howl)
+- Playing music (Howlerjs)
 - Internationalization (i18n)
 - Progressive Web App
+
+## What have I learned?
+
+Here I will write specifics that I will take with me going forward. Lorem corporate ipsum. Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.
 
 ## Project setup
 ```
