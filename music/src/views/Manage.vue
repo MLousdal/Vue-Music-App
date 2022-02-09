@@ -1,6 +1,6 @@
 <template>
   <!-- Main Content -->
-  <section class="container mx-auto mt-6">
+  <main class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
         <app-upload ref="upload" :addSong="addSong"></app-upload>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </main>
 </template>
 
 <script>
