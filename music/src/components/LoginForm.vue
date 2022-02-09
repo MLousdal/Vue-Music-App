@@ -25,13 +25,13 @@
           focus:outline-none focus:border-black
           rounded
         "
-        placeholder="Enter Email"
+        :placeholder="`${$t('auth.enter')} email`"
       />
       <ErrorMessage class="text-red-600" name="email" as="p" />
     </div>
     <!-- Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Password</label>
+      <label class="inline-block mb-2">{{ $t('auth.password') }}</label>
       <vee-field
         name="password"
         type="password"
@@ -47,7 +47,7 @@
           focus:outline-none focus:border-black
           rounded
         "
-        placeholder="Password"
+        :placeholder="`${$t('auth.enter')} ${$t('auth.password')}`"
       />
       <ErrorMessage class="text-red-600" name="password" as="p" />
     </div>
@@ -66,7 +66,7 @@
       "
       :disabled="log_in_submission"
     >
-      Submit
+      {{ $t('submit') }}
     </button>
   </vee-form>
 </template>

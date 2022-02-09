@@ -13,7 +13,7 @@
   >
     <!-- Name -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Name</label>
+      <label class="inline-block mb-2">{{ $t('auth.name') }}</label>
       <vee-field
         name="name"
         type="text"
@@ -29,7 +29,7 @@
           focus:outline-none focus:border-black
           rounded
         "
-        placeholder="Enter Name"
+        :placeholder="`${$t('auth.enter')} ${$t('auth.name')}`"
       />
       <ErrorMessage class="text-red-600" name="name" as="p" />
     </div>
@@ -51,13 +51,13 @@
           focus:outline-none focus:border-black
           rounded
         "
-        placeholder="Enter Email"
+        :placeholder="`${$t('auth.enter')} email`"
       />
       <ErrorMessage class="text-red-600" name="email" as="p" />
     </div>
     <!-- Age -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Age</label>
+      <label class="inline-block mb-2">{{ $t('auth.age') }}</label>
       <vee-field
         name="age"
         type="number"
@@ -78,7 +78,7 @@
     </div>
     <!-- Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Password</label>
+      <label class="inline-block mb-2">{{ $t('auth.password') }}</label>
       <vee-field name="password" :bails="false" #default="{ field, errors }">
         <input
           type="password"
@@ -94,7 +94,7 @@
             focus:outline-none focus:border-black
             rounded
           "
-          placeholder="Password"
+          :placeholder="$t('auth.password')"
           v-bind="field"
         />
         <div class="text-red-600" v-for="error in errors" :key="error">
@@ -104,7 +104,7 @@
     </div>
     <!-- Confirm Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Confirm Password</label>
+      <label class="inline-block mb-2">{{ $t('auth.conf_password') }}</label>
       <vee-field
         name="confirm_password"
         type="password"
@@ -120,13 +120,13 @@
           focus:outline-none focus:border-black
           rounded
         "
-        placeholder="Confirm Password"
+        :placeholder="$t('auth.conf_password')"
       />
       <ErrorMessage class="text-red-600" name="confirm_password" as="p" />
     </div>
     <!-- Country -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Country</label>
+      <label class="inline-block mb-2">{{ $t('auth.country') }}</label>
       <vee-field
         as="select"
         name="country"
@@ -152,7 +152,7 @@
     </div>
     <!-- Listener / Artist -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Listener or Artist?</label>
+      <label class="inline-block mb-2">{{ $t('auth.listener') }} {{ $t('auth.or') }} {{ $t('auth.artist') }}?</label>
       <vee-field
         as="select"
         name="lis_art"
@@ -169,8 +169,8 @@
           rounded
         "
       >
-        <option value="Listener">Listener</option>
-        <option value="Artist">Artist</option>
+        <option value="Listener">{{ $t('auth.listener') }}</option>
+        <option value="Artist">{{ $t('auth.artist') }}</option>
       </vee-field>
       <ErrorMessage class="text-red-600" name="lis_art" as="p" />
     </div>
@@ -182,7 +182,9 @@
         value="1"
         class="w-4 h-4 float-left -ml-6 mt-1 rounded"
       />
-      <label class="inline-block">Accept terms of service</label>
+      <i18n-t class="inline-block" keypath="register.accept" tag="label"
+        ><a href="#">{{ $t('register.TOS') }}</a></i18n-t
+      >
       <ErrorMessage class="text-red-600" name="tos" as="p" />
     </div>
     <button
@@ -200,7 +202,7 @@
       "
       :disabled="reg_in_submission"
     >
-      Submit
+      {{ $t('submit') }}
     </button>
   </vee-form>
 </template>

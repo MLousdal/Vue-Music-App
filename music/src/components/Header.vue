@@ -16,26 +16,33 @@
           <!-- Navigation Links -->
           <li>
             <router-link class="px-2 text-white" :to="{ name: 'About' }"
-              >About</router-link
+              >{{ $t('about') }}</router-link
             >
           </li>
           <li v-if="!userLoggedIn">
             <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
-              >Login / Register</a
+              >{{ $t('auth.login') }} / {{ $t('auth.register') }}</a
             >
           </li>
           <template v-else>
             <li>
               <router-link class="px-2 text-white" :to="{ name: 'Manage' }"
-                >Manage</router-link
+                >{{ $t('manage.manage') }}</router-link
               >
             </li>
             <li>
               <a class="px-2 text-white" to="#" @click.prevent="signOut"
-                >Logout</a
+                >{{ $t('auth.logout') }}</a
               >
             </li>
           </template>
+        </ul>
+        <ul class="flex flex-row mt-1 ml-auto">
+          <li>
+            <a href="#" class="px-2 text-white" @click.prevent="changeLocale">{{
+              currentLocale
+            }}</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -49,6 +56,9 @@ export default {
   name: 'Header',
   computed: {
     ...mapState(['userLoggedIn']),
+    currentLocale() {
+      return this.$i18n.locale === 'da' ? 'Dansk' : 'English'
+    },
   },
   methods: {
     ...mapMutations(['toggleAuthModal']),
@@ -57,6 +67,9 @@ export default {
       if (this.$route.meta.requiresAuth) {
         this.$router.push({ name: 'Home' })
       }
+    },
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'da' ? 'en' : 'da'
     },
   },
 }

@@ -1,0 +1,37 @@
+{
+  "about": "About",
+  "auth": {
+    "account": "Your account",
+    "age": "Age",
+    "artist": "Artist",
+    "conf_password": "Condirm password",
+    "country": "Country",
+    "enter": "Enter",
+    "listener": "Lytter",
+    "login": "Login",
+    "logout": "Logout",
+    "name": "Name",
+    "or": "eller",
+    "password": "Password",
+    "register": "Register"
+  },
+  "home": {
+    "listen": "Listen to Great Music!",
+    "songs": "Songs"
+  },
+  "manage": {
+    "manage": "Manage",
+    "songs": "My songs",
+    "upload": "Upload"
+  },
+  "register": {
+    "TOS": "Terms of Service",
+    "accept": "I accept Music's {0}"
+  },
+  "song": {
+    "comment_count": "No comments | 1 Comment | {count} Comments",
+    "latest": "Latest",
+    "oldest": "Oldest"
+  },
+  "submit": "Submit"
+}

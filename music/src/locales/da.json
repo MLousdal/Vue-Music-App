@@ -1,0 +1,37 @@
+{
+  "about": "Om",
+  "auth": {
+    "account": "Din bruger",
+    "age": "Alder",
+    "artist": "Kunstner",
+    "conf_password": "Bekræft kodeord",
+    "country": "Land",
+    "enter": "Indtast",
+    "listener": "Lytter",
+    "login": "Log på",
+    "logout": "Log ud",
+    "name": "Navn",
+    "or": "eller",
+    "password": "Kodeord",
+    "register": "Tilmeld"
+  },
+  "home": {
+    "listen": "Lyt til fed musik!",
+    "songs": "Sange"
+  },
+  "manage": {
+    "manage": "Kontor",
+    "songs": "Mine sange",
+    "upload": ""
+  },
+  "register": {
+    "TOS": "Servicevilkår",
+    "accept": "Jeg accepterer Music's {0}"
+  },
+  "song": {
+    "comment_count": "Ingen kommentare | 1 kommentar | {count} kommentare",
+    "latest": "Seneste",
+    "oldest": "Ældste"
+  },
+  "submit": "Indsend"
+}
