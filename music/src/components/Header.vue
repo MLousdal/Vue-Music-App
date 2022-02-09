@@ -15,9 +15,9 @@
         <ul class="flex flex-row mt-1">
           <!-- Navigation Links -->
           <li>
-            <router-link class="px-2 text-white" :to="{ name: 'About' }"
-              >{{ $t('about') }}</router-link
-            >
+            <router-link class="px-2 text-white" :to="{ name: 'About' }">{{
+              $t('about')
+            }}</router-link>
           </li>
           <li v-if="!userLoggedIn">
             <a class="px-2 text-white" href="#" @click.prevent="toggleAuthModal"
@@ -26,14 +26,14 @@
           </li>
           <template v-else>
             <li>
-              <router-link class="px-2 text-white" :to="{ name: 'Manage' }"
-                >{{ $t('manage.manage') }}</router-link
-              >
+              <router-link class="px-2 text-white" :to="{ name: 'Manage' }">{{
+                $t('manage.manage')
+              }}</router-link>
             </li>
             <li>
-              <a class="px-2 text-white" to="#" @click.prevent="signOut"
-                >{{ $t('auth.logout') }}</a
-              >
+              <a class="px-2 text-white" to="#" @click.prevent="signOut">{{
+                $t('auth.logout')
+              }}</a>
             </li>
           </template>
         </ul>
@@ -55,7 +55,9 @@ import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'Header',
   computed: {
-    ...mapState(['userLoggedIn']),
+    ...mapState({
+      userLoggedIn: (state) => state.auth.userLoggedIn,
+    }),
     currentLocale() {
       return this.$i18n.locale === 'da' ? 'Dansk' : 'English'
     },

@@ -148,20 +148,21 @@ export default {
       comment_alert_message: 'Please wait! Your comment is being submitted',
     }
   },
-  async created() {
-    const docSnapshot = await songsCollection.doc(this.$route.params.id).get()
+  async beforeRouteEnter(to, from, next) {
+    const docSnapshot = await songsCollection.doc(to.params.id).get()
+    next((vm) => {
+      if (!docSnapshot.exists) {
+        vm.$router.push({ name: 'Home' })
+        return
+      }
 
-    if (!docSnapshot.exists) {
-      this.$router.push({ name: 'Home' })
-      return
-    }
+      const { sort } = vm.$route.query
 
-    const { sort } = this.$route.query
+      vm.sort = sort === '1' || sort === '2' ? sort : '1'
 
-    this.sort = sort === '1' || sort === '2' ? sort : '1'
-
-    this.song = docSnapshot.data()
-    this.getComments()
+      vm.song = docSnapshot.data()
+      vm.getComments()
+    })
   },
   methods: {
     ...mapActions(['newSong']),
@@ -211,7 +212,9 @@ export default {
     },
   },
   computed: {
-    ...mapState(['userLoggedIn']),
+    ...mapState({
+      userLoggedIn: (state) => state.auth.userLoggedIn,
+    }),
     ...mapGetters(['playing']),
     sortedComments() {
       return this.comments.slice().sort((a, b) => {
