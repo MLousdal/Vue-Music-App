@@ -21,6 +21,7 @@
             focus:outline-none
           "
           @click.prevent="newSong(song)"
+          id="playBtn"
         >
           <i
             class="fas"
